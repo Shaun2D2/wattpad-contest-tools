@@ -12,14 +12,14 @@ const fetch = async () => {
 
     try {
         const response = await got(
-            `https://www.wattpad.com/api/v3/lists/${listId}/stories?fields=id%2Cname%2Cstories%28id%2Ctitle%2Ccover%2Cdescription%2Curl%2CvoteCount%2CreadCount%2CnumParts%2CfirstPartId%2Ccompleted%2Ctags%2Cmature%2Cuser%28name%2Cavatar%29%29%2Ctotal%2CnextUrl&limit=100`
+            `https://www.wattpad.com/api/v3/lists/${listId}/stories?fields=id%2Cname%2Cstories%28id%2Ctitle%2Ccover%2Cdescription%2Curl%2CvoteCount%2CreadCount%2CnumParts%2CfirstPartId%2Ccompleted%2Ctags%2Cmature%2Cuser%28name%2Cavatar%29%29%2Ctotal%2CnextUrl&limit=1000`
         ).json();
 
         const storyIds = response.stories.map(story => story.id);
 
         const promises = [];
 
-        storyIds.map(id => promises.push(got(`https://www.wattpad.com/api/v3/stories/${id}`).json()));
+        storyIds.map(id => promises.push(got(`https://www.wattpad.com/api/v3/stories/${id}?limit=1000`).json()));
 
         const storyParts = await Promise.all(promises);
 
