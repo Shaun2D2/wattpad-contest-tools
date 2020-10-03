@@ -3,7 +3,7 @@ const _ = require('lodash');
 const fs = require('fs');
 
 const fetch = async (event, context, callback) => {
-  const id = /\d+/.exec('event.path');
+  const id = /\d+/.exec(event.path);
 
   if (!id) {
     callback(null, {
