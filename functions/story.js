@@ -5,7 +5,7 @@ const BASE_API_V3 = 'https://www.wattpad.com/api/v3/';
 
 const fetchStory = async ({ id }) => got(`${BASE_API_V3}stories/${id}?limit=1000`).json();
 
-const list = async (event, context, callback) => {
+const story = async (event, context, callback) => {
   try {
     const id = _.get(/\d+/.exec(event.path), 0, null);
 
@@ -20,6 +20,8 @@ const list = async (event, context, callback) => {
 
     const response = await fetchStory({ id });
 
+    console.log(response);
+
     callback(null, {
       statusCode: 200,
       body: JSON.stringify(response.stories),
@@ -31,4 +33,4 @@ const list = async (event, context, callback) => {
   }
 };
 
-exports.handler = list;
+exports.handler = story;
