@@ -20,11 +20,9 @@ const story = async (event, context, callback) => {
 
     const response = await fetchStory({ id });
 
-    console.log(response);
-
     callback(null, {
       statusCode: 200,
-      body: JSON.stringify(response.stories),
+      body: JSON.stringify(response),
     });
   } catch (e) {
     console.log(e);
