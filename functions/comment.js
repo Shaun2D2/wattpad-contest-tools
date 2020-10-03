@@ -21,7 +21,7 @@ const list = async (event, context, callback) => {
 
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify(response.stories),
+    body: JSON.stringify(response),
   });
 };
 
