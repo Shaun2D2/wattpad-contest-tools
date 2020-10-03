@@ -3,6 +3,19 @@ const _ = require('lodash');
 const fs = require('fs');
 
 const fetch = async (event, context, callback) => {
+  const id = /\d+/.exec('event.path');
+
+  if (!id) {
+    callback(null, {
+      statusCode: 400,
+      body: {
+        message: 'id is required must be a number',
+      },
+    });
+
+    return;
+  }
+
   callback(null, {
     statusCode: 200,
     body: JSON.stringify(event),
