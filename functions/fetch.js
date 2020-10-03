@@ -43,8 +43,6 @@ const fetch = async (event, context, callback) => {
 
     const storyParts = await Promise.all(promises);
 
-    const allThePromises = [];
-
     for (const story of storyParts) {
       bookComments[story.title] = {};
 
