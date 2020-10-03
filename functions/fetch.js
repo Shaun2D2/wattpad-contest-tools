@@ -2,7 +2,14 @@ const got = require('got');
 const _ = require('lodash');
 const fs = require('fs');
 
-const fetch = async () => {
+const fetch = async (event, context, callback) => {
+  callback(null, {
+    statusCode: 200,
+    body: JSON.stringify(event),
+  });
+
+  return;
+
   const bookComments = {};
 
   const listId = 920891761;
