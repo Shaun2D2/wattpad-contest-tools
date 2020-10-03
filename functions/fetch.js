@@ -8,9 +8,9 @@ const fetch = async (event, context, callback) => {
   if (!id) {
     callback(null, {
       statusCode: 400,
-      body: {
+      body: JSON.stringify({
         message: 'id is required must be a number',
-      },
+      }),
     });
 
     return;
