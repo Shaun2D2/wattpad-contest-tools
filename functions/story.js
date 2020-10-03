@@ -27,7 +27,7 @@ const list = async (event, context, callback) => {
   } catch (e) {
     console.log(e);
 
-    callback(null { statusCode: 400, body: e.message });
+    callback(null, { statusCode: 400, body: e.message });
   }
 };
 
