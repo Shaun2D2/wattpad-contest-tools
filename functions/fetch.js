@@ -20,8 +20,6 @@ const fetch = async (event, context, callback) => {
 
     const hash = _.get(event.queryStringParameters, 'hash', null);
 
-    console.log(id, hash);
-
     if (!id) {
       callback(null, {
         statusCode: 400,

@@ -1,4 +1,5 @@
 const got = require('got');
+const _ = require('lodash');
 
 const BASE_API_V3 = 'https://www.wattpad.com/api/v3/';
 
