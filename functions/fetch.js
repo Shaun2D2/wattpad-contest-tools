@@ -66,4 +66,4 @@ const fetch = async (event, context, callback) => {
   }
 };
 
-module.handler = fetch;
+exports.handler = fetch;
