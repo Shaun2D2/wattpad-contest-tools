@@ -1,4 +1,5 @@
 import React, { useCallback, useSelector } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
   Card, Col, Row, Form, Input, Button, Select,
@@ -6,6 +7,7 @@ import {
 
 import list from '../../redux/modules/list';
 import story from '../../redux/modules/story';
+import comment from '../../redux/modules/comment';
 
 import Swal from '../Components/Alert';
 import Page from '../Components/Page';
@@ -14,6 +16,7 @@ import './Home.scss';
 
 const Home = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = useCallback(async (values) => {
     Swal.fire({
@@ -32,7 +35,13 @@ const Home = () => {
 
     const loadedStories = await Promise.all(storiesPromises);
 
-    console.log(loadedStories);
+    const partCommentPromises = [];
+
+    loadedStories.forEach((stories) => stories.parts.forEach(part => partCommentPromises.push(dispatch(comment.actionCreators.getComment({ id: storyItem.id })))));
+
+    await Promise.all(partCommentPromises);
+
+    history.push(`/comment-contest/${values.id}?criteria=${values.criteria}&hashTag=${values.hashTag}`);
   }, []);
 
   return (
@@ -61,8 +70,7 @@ const Home = () => {
               >
                 <Input addonBefore="#" />
               </Form.Item>
-
-              <Form.Item label="Criteria">
+              <Form.Item label="Criteria" name="criteria">
                 <Select defaultValue="all-comments">
                   <Select.Option value="all-comments">
                     All comments per chapter
@@ -72,7 +80,6 @@ const Home = () => {
                   </Select.Option>
                 </Select>
               </Form.Item>
-
               <Form.Item>
                 <Button type="primary" htmlType="submit">Submit</Button>
               </Form.Item>
