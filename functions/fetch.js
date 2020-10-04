@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 const got = require('got');
 const _ = require('lodash');
-const fs = require('fs');
 
 const BASE_API_V3 = 'https://www.wattpad.com/api/v3/';
 const BASE_API_V4 = 'https://www.wattpad.com/v4/';

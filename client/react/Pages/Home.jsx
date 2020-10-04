@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Card, Col, Row, Form, Input, Button, Select,
 } from 'antd';
+
+import list from '../../redux/modules/list';
 
 import Swal from '../Components/Alert';
 import Page from '../Components/Page';
@@ -9,7 +12,9 @@ import Page from '../Components/Page';
 import './Home.scss';
 
 const Home = () => {
-  const handleSubmit = useCallback(() => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = useCallback(async (values) => {
     Swal.fire({
       title: 'One Moment',
       allowOutsideClick: false,
@@ -17,6 +22,10 @@ const Home = () => {
         Swal.showLoading();
       },
     });
+
+    const response = await dispatch(list.actionCreators.getList({ id: values.listId }));
+
+    console.log('completed!');
   }, []);
 
   return (
