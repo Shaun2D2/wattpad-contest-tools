@@ -37,9 +37,17 @@ const Home = () => {
 
     const partCommentPromises = [];
 
-    console.log(loadedStories);
+    if (loadedStories) {
+      for (record in loadedStories) {
+        const promises = [];
 
-    loadedStories.forEach((record) => record.payload.parts.forEach(part => partCommentPromises.push(dispatch(comment.actionCreators.getComment({ id: part.id })))));
+        record.payload.parts.forEach((part) => partCommentPromises.push(dispatch(comment.actionCreators.getComment({ id: part.id }))));
+
+        await Promise.all(promises);
+      }
+    }
+
+    // loadedStories.forEach((record) => record.payload.parts.forEach(part => partCommentPromises.push(dispatch(comment.actionCreators.getComment({ id: part.id })))));
 
     await Promise.all(partCommentPromises);
 
