@@ -25,7 +25,7 @@ const Home = () => {
 
     const response = await dispatch(list.actionCreators.getList({ id: values.listId }));
 
-    console.log('completed!');
+    console.log(response);
   }, []);
 
   return (
