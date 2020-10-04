@@ -38,7 +38,7 @@ const Home = () => {
     for (const record of loadedStories) {
       const promises = [];
 
-      record.payload.parts.forEach((part) => partCommentPromises.push(dispatch(comment.actionCreators.getComment({ id: part.id }))));
+      record.payload.parts.forEach((part) => promises.push(dispatch(comment.actionCreators.getComment({ id: part.id }))));
 
       await Promise.all(promises);
     }
