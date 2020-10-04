@@ -49,4 +49,15 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  devServer: {
+    proxy: {
+      '/.netlify': {
+        target: {
+          host: 'fluffyduck.tech/.netlify/functions',
+          protocol: 'http:',
+          port: 443,
+        },
+      },
+    },
+  },
 };

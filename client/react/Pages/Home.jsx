@@ -39,7 +39,7 @@ const Home = () => {
 
     console.log(loadedStories);
 
-    loadedStories.forEach((record) => record.payload.parts.forEach(part => partCommentPromises.push(dispatch(comment.actionCreators.getComment({ id: storyItem.id })))));
+    loadedStories.forEach((record) => record.payload.parts.forEach(part => partCommentPromises.push(dispatch(comment.actionCreators.getComment({ id: part.id })))));
 
     await Promise.all(partCommentPromises);
 
