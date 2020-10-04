@@ -2,7 +2,7 @@ import Reduxful from 'reduxful';
 import requestAdapter from '../fetch-adapter';
 
 const desc = {
-  getList: {
+  getStory: {
     url: 'https://fluffyduck.tech/.netlify/functions/story/:id',
     dataTransform: (data) => JSON.parse(data),
   },

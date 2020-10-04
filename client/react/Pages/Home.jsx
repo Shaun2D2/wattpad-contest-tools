@@ -28,7 +28,7 @@ const Home = () => {
 
     const storiesPromises = [];
 
-    response.payload.forEach(story => dispatch(story.actionCreators.getStory({ id: story.id })));
+    response.payload.forEach((storyItem) => dispatch(story.actionCreators.getStory({ id: storyItem.id })));
 
     const loadedStories = await Promise.all(storiesPromises);
 

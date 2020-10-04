@@ -2,7 +2,7 @@ import Reduxful from 'reduxful';
 import requestAdapter from '../fetch-adapter';
 
 const desc = {
-  getList: {
+  getComment: {
     url: 'https://fluffyduck.tech/.netlify/functions/comment/:id',
     dataTransform: (data) => JSON.parse(data),
   },
