@@ -6,6 +6,7 @@ import { HeartOutlined } from '@ant-design/icons';
 
 import Menu from './Components/Menu';
 
+import CommentContest from './Pages/CommentContest';
 import Home from './Pages/Home';
 
 const {
@@ -17,8 +18,8 @@ const AppRouter = () => (
     <Menu />
     <Router>
       <Route exact path="/" component={Home} />
+      <Route exact path="/comment-contest/:id" component={CommentContest} />
     </Router>
-
     <Footer style={{ textAlign: 'center' }}>
       Made with
       {' '}

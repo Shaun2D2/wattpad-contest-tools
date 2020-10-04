@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useSelector } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   Card, Col, Row, Form, Input, Button, Select,
@@ -28,7 +28,7 @@ const Home = () => {
 
     const storiesPromises = [];
 
-    response.payload.forEach((storyItem) => dispatch(story.actionCreators.getStory({ id: storyItem.id })));
+    response.payload.forEach((storyItem) => storiesPromises.push(dispatch(story.actionCreators.getStory({ id: storyItem.id }))));
 
     const loadedStories = await Promise.all(storiesPromises);
 
