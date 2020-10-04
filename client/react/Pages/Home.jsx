@@ -5,6 +5,7 @@ import {
 } from 'antd';
 
 import list from '../../redux/modules/list';
+import story from '../../redux/modules/story';
 
 import Swal from '../Components/Alert';
 import Page from '../Components/Page';
@@ -25,7 +26,13 @@ const Home = () => {
 
     const response = await dispatch(list.actionCreators.getList({ id: values.listId }));
 
-    console.log(response);
+    const storiesPromises = [];
+
+    response.payload.forEach(story => dispatch(story.actionCreators.getStory({ id: story.id })));
+
+    const loadedStories = await Promise.all(storiesPromises);
+
+    console.log(loadedStories);
   }, []);
 
   return (
