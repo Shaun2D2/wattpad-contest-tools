@@ -6,9 +6,9 @@ const BASE_API_V4 = 'https://www.wattpad.com/v4/';
 const fetchStoryPartComments = async ({ id }) => got(`${BASE_API_V4}parts/${id}/comments?limit=1000`).json();
 
 const list = async (event, context, callback) => {
-  const id = _.get(/\d+/.exec(event.path), 0, null);
+  const ids = event.queryStringParameters.parts;  //_.get(/\d+/.exec(event.path), 0, null);
 
-  if (!id) {
+  if (!ids) {
     callback(null, {
       statusCode: 400,
       body: JSON.stringify({
@@ -17,7 +17,11 @@ const list = async (event, context, callback) => {
     });
   }
 
-  const response = await fetchStoryPartComments({ id });
+  const promises = [];
+
+  ids.split(',').forEach((id) => promises.push(fetchStoryPartComments({ id })));
+
+  const response = await Promise.all(promises);
 
   callback(null, {
     statusCode: 200,

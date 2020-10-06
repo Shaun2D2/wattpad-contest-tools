@@ -3,7 +3,7 @@ import requestAdapter from '../fetch-adapter';
 
 const desc = {
   getComment: {
-    url: 'https://fluffyduck.tech/.netlify/functions/comment/:id',
+    url: 'https://fluffyduck.tech/.netlify/functions/comment',
     dataTransform: (data) => JSON.parse(data),
   },
 };

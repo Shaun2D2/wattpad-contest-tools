@@ -35,18 +35,15 @@ const Home = () => {
 
     const loadedStories = await Promise.all(storiesPromises);
 
+    const commentPromises = [];
+
     for (const record of loadedStories) {
-      const promises = [];
+      const ids = record.payload.parts.map(part => part.id).split(',');
 
-      record.payload.parts.forEach((part) => promises.push(dispatch(comment.actionCreators.getComment({ id: part.id }))));
-
-      await Promise.all(promises);
+     commentPromises.push(dispatch(comment.actionCreators.getComment({ ids })))
     }
 
-    // const partCommentPromises = [];
-    // loadedStories.forEach((record) => record.payload.parts.forEach(part => partCommentPromises.push(dispatch(comment.actionCreators.getComment({ id: part.id })))));
-
-    // await Promise.all(partCommentPromises);
+    await Promise.all(commentPromises);
 
     history.push(`/comment-contest/${values.id}?criteria=${values.criteria}&hashTag=${values.hashTag}`);
   }, []);
